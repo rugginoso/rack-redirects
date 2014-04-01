@@ -1,6 +1,12 @@
 # Rack::Redirects
 
-TODO: Write a gem description
+This small middleware intercepts 404 responses and calls its
+configuration block with the current url to decide what to do.
+
+The configuration block can return:
+- ```nil```, the actual response is forwarded
+- empty string, it responds with a 410 - Gone response
+- an url, it responds with 301 - Moved permanently response
 
 ## Installation
 
@@ -18,7 +24,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+use Rack::Redirects::Middleware do |old_url|
+  if redirect = Redirects.find_by_old_url(old_url)
+    redirect.new_url
+end
+```
 
 ## Contributing
 
