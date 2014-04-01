@@ -1,14 +1,11 @@
 module Rack
   module Redirects
     class Middleware
-      @@find_redirect = Proc.new { nil }
+      DEFAULT_FIND_REDIRECT_PROC = Proc.new { nil }
 
-      def self.find_redirect(&blk)
-        @@find_redirect = blk
-      end
-
-      def initialize(app)
+      def initialize(app, &block)
         @app = app
+        @find_redirect = block || DEFAULT_FIND_REDIRECT_PROC
       end
 
       def call(env)
@@ -16,7 +13,7 @@ module Rack
 
         return [status, headers, body] if status != 404
 
-        case new_url = @@find_redirect.call(env['REQUEST_URI'])
+        case new_url = @find_redirect.call(env['REQUEST_URI'])
         when nil then
           return [status, headers, body]
         when '' then

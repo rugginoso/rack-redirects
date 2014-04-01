@@ -4,19 +4,18 @@ require 'rack/mock'
 
 describe 'Rack::Redirects::Middleware' do
   let(:app) do
+    redirect_url = url
+
     Rack::Builder.new do
       use Rack::Lint
-      use Rack::Redirects::Middleware
+      use Rack::Redirects::Middleware do |old_url|
+        redirect_url
+      end
       run lambda { |env| [404, {}, ['Not found']] }
     end
   end
-  let(:url) { nil }
 
-  before do
-    Rack::Redirects::Middleware.find_redirect do |old_url|
-      url
-    end
-  end
+  let(:url) { nil }
 
   context 'with a match' do
     let(:url) { '/path' }
