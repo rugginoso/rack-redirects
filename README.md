@@ -24,10 +24,23 @@ Or install it yourself as:
 
 ## Usage
 
+Rackup example:
+
 ```ruby
-use Rack::Redirects::Middleware do |old_url|
-  if redirect = Redirects.find_by_old_url(old_url)
-    redirect.new_url
+require 'rack/lobster'
+require 'rack/redirects'
+
+use Rack::CommonLogger
+use Rack::ShowExceptions
+use Rack::Redirects::Middleware do |env|
+  case env['PATH_INFO']
+  when '/' then '/lobster/'
+  when '/gone/' then ''
+  end
+end
+map "/lobster" do
+  use Rack::Lint
+  run Rack::Lobster.new
 end
 ```
 
