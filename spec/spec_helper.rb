@@ -1,4 +1,3 @@
-require 'rack/test'
 require 'simplecov'
 require 'coveralls'
 Coveralls.wear!
