@@ -13,7 +13,7 @@ module Rack
 
         return [status, headers, body] if status != 404
 
-        case new_url = @find_redirect.call(env['REQUEST_URI'])
+        case new_url = @find_redirect.call(env)
         when nil then
           return [status, headers, body]
         when '' then

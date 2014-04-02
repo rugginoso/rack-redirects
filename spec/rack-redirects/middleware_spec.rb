@@ -8,7 +8,7 @@ describe 'Rack::Redirects::Middleware' do
 
     Rack::Builder.new do
       use Rack::Lint
-      use Rack::Redirects::Middleware do |old_url|
+      use Rack::Redirects::Middleware do |env|
         redirect_url
       end
       run lambda { |env| [404, {}, ['Not found']] }
