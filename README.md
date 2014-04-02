@@ -1,6 +1,6 @@
 # Rack::Redirects
 [![Build Status](https://travis-ci.org/rugginoso/rack-redirects.svg?branch=master)](https://travis-ci.org/rugginoso/rack-redirects)
-[![Coverage Status](https://coveralls.io/repos/rugginoso/rack-redirects/badge.png)](https://coveralls.io/r/rugginoso/rack-redirects)
+[![Coverage Status](https://coveralls.io/repos/rugginoso/rack-redirects/badge.png?branch=master)](https://coveralls.io/r/rugginoso/rack-redirects?branch=master)
 [![Code Climate](https://codeclimate.com/github/rugginoso/rack-redirects.png)](https://codeclimate.com/github/rugginoso/rack-redirects)
 
 This small middleware intercepts 404 responses and calls its
